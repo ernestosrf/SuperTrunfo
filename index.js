@@ -1,6 +1,7 @@
 var cartas = [
     carta1 = {
         nome: "Bulbassauro",
+        imagem: "https://static.wikia.nocookie.net/pokepediabr/images/3/3c/001Bulbassauro.png/revision/latest?cb=20210330173024&path-prefix=pt-br", 
         atributos: {
          ataque: 92,
          defesa: 92,
@@ -9,6 +10,7 @@ var cartas = [
     },
     carta2 = {
         nome: "Charmander",
+        imagem:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png",
         atributos: {
          ataque: 98,
          defesa: 81,
@@ -17,6 +19,7 @@ var cartas = [
     },
     carta3 = {
         nome: "Pikachu",
+        imagem:"https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png",
         atributos: {
          ataque: 103,
          defesa: 76,
@@ -42,17 +45,7 @@ function sortearCarta() {
     document.getElementById("btnSortear").disabled = true;
     document.getElementById("btnJogar").disabled = false;
 
-    exibirOpcoes()
-}
-
-
-function exibirOpcoes() {
-    var opcoes = document.getElementById("opcoes")
-    var opcoesTexto = ""
-    for(var atributo in cartaJogador.atributos){
-        opcoesTexto += "<input type='radio' name='atributo' value='" + atributo + "'>" + atributo;
-    }
-    opcoes.innerHTML = opcoesTexto
+    exibirCartaJogador()
 }
 
 function obtemAtributoSelecionado() {
@@ -68,15 +61,50 @@ function obtemAtributoSelecionado() {
 
 function jogar() {
     var atributoSelecionado = obtemAtributoSelecionado()
-    var elementoResultado = document.getElementById("resultado")
+    var divResultado = document.getElementById("resultado")
     var valorCartaJogador = cartaJogador.atributos[atributoSelecionado]
     var valorCartaMaquina = cartaMaquina.atributos[atributoSelecionado]
 
     if (valorCartaJogador > valorCartaMaquina){
-        elementoResultado.innerHTML = "Você venceu"
+        elementoResultado = "<p class='resultado-final'>Venceu!</p>"
     } else if(valorCartaMaquina > valorCartaJogador){
-        elementoResultado.innerHTML = "Você perdeu! A carta da máquina é maior"
+        elementoResultado = "<p class='resultado-final'>Você perdeu! A carta da máquina é maior</p>"
     } else {
-        elementoResultado.innerHTML = "Empatou"
+        elementoResultado = "<p class='resultado-final'>Empatou!</p"
     }
+    divResultado.innerHTML = elementoResultado
+
+    document.getElementById('btnJogar').disabled = true
+    exibirCartaMaquina()
+}
+
+function exibirCartaJogador() {
+
+    var divCartaJogador = document.getElementById('carta-jogador')
+    divCartaJogador.style.backgroundImage=`url(${cartaJogador.imagem})`
+    var moldura = '<img src="https://www.alura.com.br/assets/img/imersoes/dev-2021/card-super-trunfo-transparent.png" style=" width: inherit; height: inherit; position: absolute;">'
+    var tagHTML = "<div  id='opcoes' class='carta-status'>"
+
+    var opcoesTexto = ""
+    for(var atributo in cartaJogador.atributos){
+        opcoesTexto += "<input type='radio' name='atributo' value='" + atributo + "'>" + atributo + " " + cartaJogador.atributos[atributo] + "<br>"
+    }
+    var nome = `<p class="carta-subtitle">${cartaJogador.nome}</p>`
+
+    divCartaJogador.innerHTML = moldura + nome + tagHTML + opcoesTexto + '</div>'
+}
+
+function exibirCartaMaquina() {
+    var divCartaMaquina = document.getElementById('carta-maquina')
+    divCartaMaquina.style.backgroundImage=`url(${cartaMaquina.imagem})`
+    var moldura = '<img src="https://www.alura.com.br/assets/img/imersoes/dev-2021/card-super-trunfo-transparent.png" style=" width: inherit; height: inherit; position: absolute;">'
+    var tagHTML = "<div  id='opcoes' class='carta-status'>"
+
+    var opcoesTexto = ""
+    for(var atributo in cartaMaquina.atributos){
+        opcoesTexto += "<p type='text' name='atributo' value='" + atributo + "'>" + atributo + " " + cartaMaquina.atributos[atributo] + "</p>"
+    }
+    var nome = `<p class="carta-subtitle">${cartaMaquina.nome}</p>`
+
+    divCartaMaquina.innerHTML = moldura + nome + tagHTML + opcoesTexto + '</div>'
 }
