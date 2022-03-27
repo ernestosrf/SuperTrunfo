@@ -1,7 +1,7 @@
 var cartas = [
     carta1 = {
         nome: "Bulbassauro",
-        imagem: "https://static.wikia.nocookie.net/pokepediabr/images/3/3c/001Bulbassauro.png/revision/latest?cb=20210330173024&path-prefix=pt-br", 
+        imagem: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png", 
         atributos: {
          ataque: 92,
          defesa: 92,
