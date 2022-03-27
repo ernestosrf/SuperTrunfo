@@ -76,7 +76,7 @@ function jogar() {
 
     document.getElementById('btnJogar').disabled = true
     exibirCartaMaquina()
-    document.getElementById('btnJogar').disabled = false
+    document.getElementById('btnSortear').disabled = false
 }
 
 function exibirCartaJogador() {
