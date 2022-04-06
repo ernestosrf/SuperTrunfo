@@ -25,6 +25,24 @@ var cartas = [
          defesa: 76,
          hp: 180
   }
+    },
+    carta4 = {
+        nome: "Lapras",
+        imagem: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/131.png", 
+        atributos: {
+         ataque: 157,
+         defesa: 148,
+         hp: 370
+  }
+    },
+    carta5 = {
+        nome: "Cyndaquill",
+        imagem: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/155.png", 
+        atributos: {
+         ataque: 98,
+         defesa: 81,
+         hp: 188
+  }
     }
 ]
 
@@ -32,12 +50,12 @@ var cartaMaquina = 0
 var cartaJogador = 0
 
 function sortearCarta() {
-    var numeroCartaMaquina = parseInt(Math.random()*3)
+    var numeroCartaMaquina = parseInt(Math.random()*5)
     cartaMaquina = cartas[numeroCartaMaquina]
     console.log(cartaMaquina)
-    var numeroCartaJogador = parseInt(Math.random()*3)
+    var numeroCartaJogador = parseInt(Math.random()*5)
     while (numeroCartaMaquina == numeroCartaJogador){
-        numeroCartaJogador = parseInt(Math.random()*3)
+        numeroCartaJogador = parseInt(Math.random()*5)
     }
     cartaJogador = cartas[numeroCartaJogador]
     console.log(cartaJogador)
@@ -46,6 +64,7 @@ function sortearCarta() {
     document.getElementById("btnJogar").disabled = false;
 
     exibirCartaJogador()
+    sumirCartaMaquina()
 }
 
 function obtemAtributoSelecionado() {
@@ -108,4 +127,11 @@ function exibirCartaMaquina() {
     var nome = `<p class="carta-subtitle">${cartaMaquina.nome}</p>`
 
     divCartaMaquina.innerHTML = moldura + nome + tagHTML + opcoesTexto + '</div>'
+}
+
+function sumirCartaMaquina() {
+    var divCartaMaquina = document.getElementById('carta-maquina')
+    divCartaMaquina.style.backgroundImage=""
+    var moldura = '<img src="https://www.alura.com.br/assets/img/imersoes/dev-2021/card-super-trunfo-transparent.png" style=" width: inherit; height: inherit; position: absolute;">'
+    divCartaMaquina.innerHTML = moldura + '</div>'
 }
